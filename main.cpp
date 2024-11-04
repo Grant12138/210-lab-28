@@ -219,5 +219,9 @@ void findGoatByName(list<Goat>& trip)
     else
         cout << "Goat found: " << it->get_name() << " (" << it->get_age() << ", " << it->get_color() << ")\n";
 }
-void increaseAges(list<Goat>& trip);
+// Increase Age of All Goats by 1
+void increaseAges(list<Goat>& trip)
+{
+    for_each(trip.begin(), trip.end(), [](Goat& g) -> void { g.set_age(g.get_age() + 1); });
+}
 void removeGoatsBySpecies(list<Goat>& trip);
