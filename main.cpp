@@ -207,6 +207,17 @@ void countGoatsByColor(list<Goat>& trip)
     cout << "Number of goats with " << color << " color: " << count;
 }
 // Find and Display a Goat by Name
-void findGoatByName(list<Goat>& trip);
+void findGoatByName(list<Goat>& trip)
+{
+    string name;
+    cout << "Enter goat name to find: ";
+    getline(cin, name);
+
+    auto it = find_if(trip.begin(), trip.end(), [&name](const Goat& g) -> bool { return g.get_name() == name; });
+    if (it == trip.end())
+        cout << "Goat not found\n";
+    else
+        cout << "Goat found: " << it->get_name() << " (" << it->get_age() << ", " << it->get_color() << ")\n";
+}
 void increaseAges(list<Goat>& trip);
 void removeGoatsBySpecies(list<Goat>& trip);
