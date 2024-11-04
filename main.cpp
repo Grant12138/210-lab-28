@@ -13,6 +13,16 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 
+// Additional functionalities
+void sortGoatByAge(list<Goat>& trip);
+void sortGoatByName(list<Goat>& trip);
+void reverseTripOrder(list<Goat>& trip);
+void removeGoatsOlderThan(list<Goat>& trip);
+void countGoatsByColor(list<Goat>& trip);
+void findGoatByName(list<Goat>& trip);
+void increaseAges(list<Goat>& trip);
+void removeGoatsBySpecies(list<Goat>& trip);
+
 int main() {
     srand(time(0));
     bool again;
@@ -58,13 +68,44 @@ int main() {
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
                 break;
+            case 4:
+                cout << "Sorting goats by age.\n";
+                sortGoatByAge(trip);
+                break;
+            case 5:
+                cout << "Sorting goats by name.\n";
+                sortGoatByName(trip);
+                break;
+            case 6:
+                cout << "Reversing the trip order.\n";
+                reverse_trip_order(trip);
+                break;
+            case 7:
+                cout << "Removing goats older than a certain age.\n";
+                remove_goats_older_than(trip);
+                break;
+            case 8:
+                cout << "Counting goats by color.\n";
+                count_goats_by_color(trip);
+                break;
+            case 9:
+                cout << "Finding a goat by name.\n";
+                find_goat_by_name(trip);
+                break;
+            case 10:
+                cout << "Increasing age of all goats by 1.\n";
+                increase_age_all_goats(trip);
+                break;
+            case 11:
+                cout << "Removing goats by species.\n";
+                remove_goats_by_species(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
         }
         sel = main_menu();
     }
-    
 
     return 0;
 }
@@ -78,7 +119,7 @@ int main_menu() {
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 4) {
+    while (choice < 1 || choice > 13) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
