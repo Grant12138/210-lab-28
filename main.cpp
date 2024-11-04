@@ -21,7 +21,7 @@ void removeGoatsOlderThan(list<Goat>& trip);
 void countGoatsByColor(list<Goat>& trip);
 void findGoatByName(list<Goat>& trip);
 void increaseAges(list<Goat>& trip);
-void removeGoatsBySpecies(list<Goat>& trip);
+void removeGoatsByColor(list<Goat>& trip);
 
 int main() {
     srand(time(0));
@@ -54,7 +54,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 11) {
+    while (sel != 12) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -97,8 +97,8 @@ int main() {
                 increaseAges(trip);
                 break;
             case 11:
-                cout << "Removing goats by species.\n";
-                removeGoatsBySpecies(trip);
+                cout << "Removing goats by color.\n";
+                removeGoatsByColor(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -115,20 +115,23 @@ int main_menu() {
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Sort goats by name\n";
-    cout << "[5] Reverse trip order\n";
-    cout << "[6] Remove goats older than a certain age\n";
-    cout << "[7] Count goats by color\n";
-    cout << "[8] Find a goat by name\n";
-    cout << "[9] Increase age of all goats by 1\n";
-    cout << "[10] Remove goats by species\n"
-    cout << "[11] Quit\n";
+    cout << "[4] Sort goats by age\n";
+    cout << "[5] Sort goats by name\n";
+    cout << "[6] Reverse trip order\n";
+    cout << "[7] Remove goats older than a certain age\n";
+    cout << "[8] Count goats by color\n";
+    cout << "[9] Find a goat by name\n";
+    cout << "[10] Increase age of all goats by 1\n";
+    cout << "[11] Remove goats by color\n";
+    cout << "[12] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 11) {
+    cin.ignore(1000, 10);
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
+        cin.ignore(1000, '\n');
     }
     return choice;
 }
@@ -168,9 +171,11 @@ int select_goat(list<Goat> trp) {
     display_trip(trp);
     cout << "Choice --> ";
     cin >> input;
+    cin.ignore(1000, 10);
     while (input < 1 or input > trp.size()) {
         cout << "Invalid choice, again --> ";
         cin >> input;
+        cin.ignore(1000, '\n');
     }
     return input;
 }
@@ -224,4 +229,12 @@ void increaseAges(list<Goat>& trip)
 {
     for_each(trip.begin(), trip.end(), [](Goat& g) -> void { g.set_age(g.get_age() + 1); });
 }
-void removeGoatsBySpecies(list<Goat>& trip);
+// Remove Goats by Color
+void removeGoatsByColor(list<Goat>& trip)
+{
+    string color;
+    cout << "Enter color to remove: ";
+    getline(cin, color);
+
+    trip.remove_if([&color](const Goat& g) -> bool { return g.get_color() == color; });
+}
