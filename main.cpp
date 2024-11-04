@@ -197,7 +197,16 @@ void removeGoatsOlderThan(list<Goat>& trip)
     trip.remove_if([AGE_THRESHOLD](const Goat& g) -> bool { return g.get_age() > AGE_THRESHOLD; });
 }
 // Count Goats by Color
-void countGoatsByColor(list<Goat>& trip);
+void countGoatsByColor(list<Goat>& trip)
+{
+    string color;
+    cout << "Enter color to count: ";
+    getline(cin, color);
+
+    int count = count_if(trip.begin(), trip.end(), [&color](const Goat& g) -> bool { return g.get_color() == color; });
+    cout << "Number of goats with " << color << " color: " << count;
+}
+// Find and Display a Goat by Name
 void findGoatByName(list<Goat>& trip);
 void increaseAges(list<Goat>& trip);
 void removeGoatsBySpecies(list<Goat>& trip);
