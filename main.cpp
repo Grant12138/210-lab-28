@@ -54,7 +54,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 4) {
+    while (sel != 11) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -78,27 +78,27 @@ int main() {
                 break;
             case 6:
                 cout << "Reversing the trip order.\n";
-                reverse_trip_order(trip);
+                reverseTripOrder(trip);
                 break;
             case 7:
                 cout << "Removing goats older than a certain age.\n";
-                remove_goats_older_than(trip);
+                removeGoatsOlderThan(trip);
                 break;
             case 8:
                 cout << "Counting goats by color.\n";
-                count_goats_by_color(trip);
+                countGoatsByColor(trip);
                 break;
             case 9:
                 cout << "Finding a goat by name.\n";
-                find_goat_by_name(trip);
+                findGoatByName(trip);
                 break;
             case 10:
                 cout << "Increasing age of all goats by 1.\n";
-                increase_age_all_goats(trip);
+                increaseAges(trip);
                 break;
             case 11:
                 cout << "Removing goats by species.\n";
-                remove_goats_by_species(trip);
+                removeGoatsBySpecies(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -115,11 +115,18 @@ int main_menu() {
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Quit\n";
+    cout << "[4] Sort goats by name\n";
+    cout << "[5] Reverse trip order\n";
+    cout << "[6] Remove goats older than a certain age\n";
+    cout << "[7] Count goats by color\n";
+    cout << "[8] Find a goat by name\n";
+    cout << "[9] Increase age of all goats by 1\n";
+    cout << "[10] Remove goats by species\n"
+    cout << "[11] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 13) {
+    while (choice < 1 || choice > 11) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -167,3 +174,30 @@ int select_goat(list<Goat> trp) {
     }
     return input;
 }
+
+// Sort Goats by Age
+void sortGoatByAge(list<Goat>& trip)
+{
+    trip.sort([](const Goat& a, const Goat& b) -> bool { return a.get_age() < b.get_age(); });
+}
+// Sort Goats by Name
+void sortGoatByName(list<Goat>& trip)
+{
+    trip.sort([](const Goat& a, const Goat& b) -> bool { return a.get_name() < b.get_name(); });
+}
+// Reverse the Trip Order
+void reverseTripOrder(list<Goat>& trip)
+{
+    trip.reverse();
+}
+// Remove Goats Older Than 10
+void removeGoatsOlderThan(list<Goat>& trip)
+{
+    int AGE_THRESHOLD = 10;
+    trip.remove_if([AGE_THRESHOLD](const Goat& g) -> bool { return g.get_age() > AGE_THRESHOLD; });
+}
+// Count Goats by Color
+void countGoatsByColor(list<Goat>& trip);
+void findGoatByName(list<Goat>& trip);
+void increaseAges(list<Goat>& trip);
+void removeGoatsBySpecies(list<Goat>& trip);
